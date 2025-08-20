@@ -3,55 +3,55 @@ using UnityEngine.UI; // Required for UI elements
 
 public class BatteryManager : MonoBehaviour
 {
-    public float batteryLife = 100f;
-    public float idleDrain = 1f;
-    public float moveDrain = 3f;
-    public float sprintDrain = 7f;
-    public float sprintThreshold = 5f;
-    private Animator animator;
-    private Rigidbody rb;
-    public Slider batterySlider; // Reference to UI Slider
+    public float BatteryLife = 100f;
+    public float IdleDrain = 1f;
+    public float MoveDrain = 3f;
+    public float SprintDrain = 7f;
+    public float SprintThreshold = 5f;
+    private Animator _animator;
+    private Rigidbody _rb;
+    public Slider BatterySlider; // Reference to UI Slider
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
 
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
 
-        if (rb == null)
+        if (_rb == null)
             Debug.LogError("No Rigidbody found on " + gameObject.name);
 
-        if (batterySlider != null)
-            batterySlider.maxValue = 100f;
+        if (BatterySlider != null)
+            BatterySlider.maxValue = 100f;
     }
 
     void Update()
     {
-        if (rb == null)
+        if (_rb == null)
             return;
 
-        float speed = rb.linearVelocity.magnitude;
-        float drain = idleDrain;
+        float speed = _rb.linearVelocity.magnitude;
+        float drain = IdleDrain;
 
-        if (speed > 0.1f && speed < sprintThreshold)
-            drain = moveDrain;
-        else if (speed >= sprintThreshold)
-            drain = sprintDrain;
+        if (speed > 0.1f && speed < SprintThreshold)
+            drain = MoveDrain;
+        else if (speed >= SprintThreshold)
+            drain = SprintDrain;
 
-        batteryLife -= drain * Time.deltaTime;
-        batteryLife = Mathf.Clamp(batteryLife, 0, 100f);
+        BatteryLife -= drain * Time.deltaTime;
+        BatteryLife = Mathf.Clamp(BatteryLife, 0, 100f);
 
-        if (batterySlider != null)
-            batterySlider.value = batteryLife;
+        if (BatterySlider != null)
+            BatterySlider.value = BatteryLife;
 
-        if (batteryLife <= 0)
+        if (BatteryLife <= 0)
             Die();
     }
 
     void Die()
     {
        
-        animator.SetTrigger("Die");
+        _animator.SetTrigger("Die");
         // Game over logic
     }
 

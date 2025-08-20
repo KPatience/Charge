@@ -5,13 +5,13 @@ using UnityEngine;
 public class PlatformTrigger : MonoBehaviour
 {
 
-    public GameObject platformMove;
+    public GameObject PlatformMove;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            platformMove.GetComponent<Animator>().Play("Platform");
+            PlatformMove.GetComponent<Animator>().Play("Platform");
             this.gameObject.GetComponent<BoxCollider>().enabled = false;
         }
     }
