@@ -10,10 +10,18 @@ public class PlayerData : ScriptableObject
     public bool CanMove = true;
     
     [Header("Jump Settings")]
-    public float JumpForce = 8f;
+    public float MinJumpVelocity = 5f;
+    public float MaxJumpVelocity = 15f;
+    public float JumpHoldTime = 0.3f;
     public float MaxJumpHeight = 3f;
     public float MaxDownwardVelocity = -15f;
     public KeyCode JumpKey = KeyCode.Space;
+    
+    [Header("Peak Gravity Settings")]
+    public float PeakGravityScale = 4f;
+    public float PeakDetectionThreshold = 2f;
+    public float GravityNormalizationSpeed = 2f;
+    public float EarlyPeakDetectionVelocity = 3f;
     
     [Header("Health/Status Settings")]
     public int MaxHealth = 100;
